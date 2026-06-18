@@ -1,0 +1,2 @@
+Option B (streaming) is worth adding later when we polish the project.
+It makes the UI feel much faster because the user sees progress instead of a blank wait.

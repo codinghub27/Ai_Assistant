@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Research Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800">
+
+<div class="flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 px-6 lg:px-10 py-5 shadow-sm">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-xl bg-gradient-to-br from-sky-600 to-indigo-600 flex items-center justify-center text-white font-semibold shadow-md">
+                    AI
+                </div>
+                <div>
+                    <h1 class="text-xl font-semibold text-slate-900">AI Research Assistant</h1>
+                    <p class="text-xs text-slate-500">Built with Django & LangChain Agents</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                {% if user.is_authenticated %}
+                <a href="/chat/" class="text-sm text-sky-700 hover:text-sky-900 font-medium transition-colors">Chat</a>
+                <a href="/logout/" class="text-sm bg-red-50 hover:bg-red-100 text-red-600 font-medium px-4 py-2 rounded-xl border border-red-200 transition-colors">Logout</a>
+                {% else %}
+                <a href="/login/" class="text-sm text-sky-700 hover:text-sky-900 font-medium transition-colors">Login</a>
+                <a href="/register/" class="text-sm bg-sky-700 hover:bg-sky-800 text-white px-4 py-2 rounded-xl transition-colors">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <main class="flex-1 px-6 lg:px-10 py-12">
+        <div class="max-w-5xl mx-auto">
+
+            <!-- Hero section -->
+            <div class="text-center mb-12">
+                <div class="inline-flex items-center gap-2 bg-sky-50 text-sky-700 text-xs font-semibold px-3 py-1.5 rounded-full border border-sky-200 mb-4">
+                    ⚡ Powered by LangChain ReAct Agent + Groq LLM
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-3">
+                    Research anything, instantly.
+                </h2>
+                <p class="text-slate-500 text-base sm:text-lg max-w-xl mx-auto">
+                    Ask a question. The agent searches the web, reads sources, and returns a structured answer — with references.
+                </p>
+                <div class="flex items-center justify-center gap-3 mt-6">
+                    <a href="/chat/"
+                       class="inline-flex items-center gap-2 bg-sky-700 hover:bg-sky-800 text-white font-semibold px-6 py-3 rounded-xl shadow-md transition-colors">
+                        Open Chat →
+                    </a>
+                    <a href="/api/docs/"
+                       class="inline-flex items-center gap-2 bg-white hover:bg-slate-50 text-slate-700 font-semibold px-6 py-3 rounded-xl border border-slate-200 shadow-sm transition-colors">
+                        API Docs
+                    </a>
+                </div>
+            </div>
+
+            <!-- Pages section -->
+            <div class="mb-10">
+                <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-400 mb-4">Pages</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                    <a href="/chat/" class="group bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:border-sky-300 hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="h-9 w-9 rounded-xl bg-sky-100 flex items-center justify-center text-sky-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                                </svg>
+                            </div>
+                            <span class="font-semibold text-slate-800 group-hover:text-sky-700 transition-colors">Chat</span>
+                        </div>
+                        <p class="text-sm text-slate-500">Ask research questions and get structured answers with sources.</p>
+                        <p class="text-xs text-sky-600 mt-2 font-medium">/chat/</p>
+                    </a>
+
+                    <a href="/history/" class="group bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:border-sky-300 hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="h-9 w-9 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <span class="font-semibold text-slate-800 group-hover:text-sky-700 transition-colors">History</span>
+                        </div>
+                        <p class="text-sm text-slate-500">View all your past research questions and answers.</p>
+                        <p class="text-xs text-sky-600 mt-2 font-medium">/history/</p>
+                    </a>
+
+                    <a href="/login/" class="group bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:border-sky-300 hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="h-9 w-9 rounded-xl bg-green-100 flex items-center justify-center text-green-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                </svg>
+                            </div>
+                            <span class="font-semibold text-slate-800 group-hover:text-sky-700 transition-colors">Login</span>
+                        </div>
+                        <p class="text-sm text-slate-500">Sign in to your account to start researching.</p>
+                        <p class="text-xs text-sky-600 mt-2 font-medium">/login/</p>
+                    </a>
+
+                    <a href="/register/" class="group bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:border-sky-300 hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="h-9 w-9 rounded-xl bg-purple-100 flex items-center justify-center text-purple-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                </svg>
+                            </div>
+                            <span class="font-semibold text-slate-800 group-hover:text-sky-700 transition-colors">Register</span>
+                        </div>
+                        <p class="text-sm text-slate-500">Create a new account to access the research assistant.</p>
+                        <p class="text-xs text-sky-600 mt-2 font-medium">/register/</p>
+                    </a>
+
+                    <a href="/api/docs/" class="group bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:border-sky-300 hover:shadow-md transition-all">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="h-9 w-9 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                </svg>
+                            </div>
+                            <span class="font-semibold text-slate-800 group-hover:text-sky-700 transition-colors">API Docs</span>
+                        </div>
+                        <p class="text-sm text-slate-500">Interactive Swagger UI to explore and test all API endpoints.</p>
+                        <p class="text-xs text-sky-600 mt-2 font-medium">/api/docs/</p>
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- API Endpoints section -->
+            <div class="mb-10">
+                <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-400 mb-4">API Endpoints</h3>
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200">
+                                <th class="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Method</th>
+                                <th class="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Endpoint</th>
+                                <th class="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Description</th>
+                                <th class="text-left px-5 py-3 text-xs font-semibold uppercase tracking-wide text-slate-500">Auth</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-5 py-3"><span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded">POST</span></td>
+                                <td class="px-5 py-3 font-mono text-xs text-slate-700">/api/token/</td>
+                                <td class="px-5 py-3 text-slate-600">Login — get access & refresh tokens</td>
+                                <td class="px-5 py-3"><span class="text-xs text-slate-400">No</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-5 py-3"><span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded">POST</span></td>
+                                <td class="px-5 py-3 font-mono text-xs text-slate-700">/api/token/refresh/</td>
+                                <td class="px-5 py-3 text-slate-600">Refresh expired access token</td>
+                                <td class="px-5 py-3"><span class="text-xs text-slate-400">No</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-5 py-3"><span class="bg-green-100 text-green-700 text-xs font-bold px-2 py-0.5 rounded">POST</span></td>
+                                <td class="px-5 py-3 font-mono text-xs text-slate-700">/api/research/</td>
+                                <td class="px-5 py-3 text-slate-600">Ask a research question — runs agent</td>
+                                <td class="px-5 py-3"><span class="text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-medium">JWT</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-5 py-3"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded">GET</span></td>
+                                <td class="px-5 py-3 font-mono text-xs text-slate-700">/api/research/history/</td>
+                                <td class="px-5 py-3 text-slate-600">Get all past queries and answers</td>
+                                <td class="px-5 py-3"><span class="text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-medium">JWT</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-5 py-3"><span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">DELETE</span></td>
+                                <td class="px-5 py-3 font-mono text-xs text-slate-700">/api/research/delete/</td>
+                                <td class="px-5 py-3 text-slate-600">Clear all research history</td>
+                                <td class="px-5 py-3"><span class="text-xs bg-sky-100 text-sky-700 px-2 py-0.5 rounded font-medium">JWT</span></td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-5 py-3"><span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-0.5 rounded">GET</span></td>
+                                <td class="px-5 py-3 font-mono text-xs text-slate-700">/api/docs/</td>
+                                <td class="px-5 py-3 text-slate-600">Interactive Swagger API documentation</td>
+                                <td class="px-5 py-3"><span class="text-xs text-slate-400">No</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Agent tools section -->
+            <div>
+                <h3 class="text-sm font-semibold uppercase tracking-wide text-slate-400 mb-4">Agent Tools</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+                        <p class="text-xs font-bold text-sky-700 mb-1">🔍 web_search</p>
+                        <p class="text-xs text-slate-500">Searches the web via Tavily API for current information and news.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+                        <p class="text-xs font-bold text-indigo-700 mb-1">🌐 url_reader</p>
+                        <p class="text-xs text-slate-500">Fetches and extracts clean text content from any URL.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+                        <p class="text-xs font-bold text-green-700 mb-1">📖 wikipedia_tool</p>
+                        <p class="text-xs text-slate-500">Gets Wikipedia summaries for factual and background topics.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4">
+                        <p class="text-xs font-bold text-amber-700 mb-1">✂️ summarizer_tool</p>
+                        <p class="text-xs text-slate-500">Condenses long text into structured bullet points using LLM.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 px-6 py-4 text-center text-xs text-slate-400">
+        Built with Django · LangChain ReAct Agents · Groq · PostgreSQL &nbsp;·&nbsp; By Srav ❤️
+    </footer>
+
+</div>
+
+</body>
+</html>
