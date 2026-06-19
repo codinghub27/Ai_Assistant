@@ -27,7 +27,7 @@ def web_search(search_query: str):
     response = client.search(
         query=search_query,
         search_depth="advanced",
-        max_results=5,
+        max_results=3,
     )
     results = response.get("results", [])
     if not results:
@@ -35,11 +35,12 @@ def web_search(search_query: str):
 
     blocks = []
     for index, item in enumerate(results, start=1):
+        snippet = item.get('content', 'N/A')[:300]  # limit snippet length
         blocks.append(
             f"Result {index}\n"
             f"Title: {item.get('title', 'N/A')}\n"
             f"Url: {item.get('url', 'N/A')}\n"
-            f"Snippet: {item.get('content', 'N/A')}"
+            f"Snippet: {snippet}"
         )
     return "\n\n".join(blocks)
 

@@ -79,37 +79,37 @@ WSGI_APPLICATION = 'research.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'research_db',
-#         'USER':'postgres',
-#         'PASSWORD':os.getenv('DB_PASSWORD'),
-#         'HOST':'localhost',
-#         'PORT':'5432'
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'research_db',
+        'USER':'postgres',
+        'PASSWORD':os.getenv('DB_PASSWORD'),
+        'HOST':'localhost',
+        'PORT':'5432'
+    }
+}
+# import dj_database_url
+#
+# DATABASE_URL = os.getenv('DATABASE_URL')
+#
+# if DATABASE_URL:
+#     # Render deployment
+#     DATABASES = {
+#         'default': dj_database_url.parse(DATABASE_URL)
 #     }
-# }
-import dj_database_url
-
-DATABASE_URL = os.getenv('DATABASE_URL')
-
-if DATABASE_URL:
-    # Render deployment
-    DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL)
-    }
-else:
-    # Local development
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME', 'research_db'),
-            'USER': os.getenv('DB_USER', 'postgres'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
+# else:
+#     # Local development
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': os.getenv('DB_NAME', 'research_db'),
+#             'USER': os.getenv('DB_USER', 'postgres'),
+#             'PASSWORD': os.getenv('DB_PASSWORD'),
+#             'HOST': 'localhost',
+#             'PORT': '5432',
+#         }
+#     }
 
 
 # Password validation
