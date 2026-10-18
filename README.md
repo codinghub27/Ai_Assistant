@@ -211,4 +211,12 @@ research/
 
 ## Built by
 
-Sravani — B.Tech AI&DS, learning LangChain agents as a bridge to LangGraph.
+**N Sravan Kumar** ([@codinghub27](https://github.com/codinghub27)), final-year B.Tech in Artificial Intelligence & Data Science, Swarnandhra College of Engineering and Technology, Narsapur
+
+[Portfolio](https://sravan-kumar-portfolio-umber.vercel.app/) · [LinkedIn](https://in.linkedin.com/in/sravan-n-1a32943aa) · [Email](mailto:sravannkumard@gmail.com)
+
+---
+
+## 📜 License
+
+Released under the [MIT License](LICENSE).
